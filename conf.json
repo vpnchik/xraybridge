@@ -1,0 +1,74 @@
+{
+  "log": {
+    "loglevel": "info",
+    "error": "error.log",
+    "access": "access.log"
+  },
+  "outbounds" : [
+    {
+      "streamSettings" : {
+        "security" : "reality",
+        "tcpSettings" : {
+          "header" : {
+            "type" : "none"
+          }
+        },
+        "network" : "tcp",
+        "realitySettings" : {
+          "spiderX" : "",
+          "publicKey" : "Sdu_MtYjKCUTaHX3X6fy25HTC5o-3RoPjPZf77yNxzw",
+          "serverName" : "www.microsoft.com",
+          "show" : false,
+          "shortId" : "d959dd71f1a9df62",
+          "fingerprint" : "chrome"
+        }
+      },
+      "protocol" : "vless",
+      "tag" : "proxy",
+      "settings" : {
+        "vnext" : [
+          {
+            "address" : "65.109.134.164",
+            "users" : [
+              {
+                "id" : "82cf518a-9b8b-457a-aa30-f624f19b7dbc",
+                "encryption" : "none",
+                "flow" : "xtls-rprx-vision-udp443"
+              }
+            ],
+            "port" : 443
+          }
+        ]
+      }
+    },
+    {
+      "protocol" : "freedom",
+      "tag" : "direct"
+    },
+    {
+      "protocol" : "blackhole",
+      "tag" : "block"
+    }
+  ],
+  "inbounds" : [
+    {
+      "tag": "input",
+      "port": 8080,
+      "protocol": "dokodemo-door",
+      "settings": {
+        "network": "tcp,udp",
+        "followRedirect": true
+      }
+    }
+  ],
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "type": "field",
+        "inboundTag": ["input"],
+        "outboundTag": "direct"
+      }
+    ]
+  }
+}
